@@ -31,7 +31,7 @@
                                 <tbody>
                                     @foreach ($albums as $album)
                                     <tr class="bg-white border-b"">
-                                        <td class="px-6 py-4 text-sm font-medium text-gray-900  whitespace-nowrap">
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                                         {{ $album->id }}</td>
                                         <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                                             <a href="{{ route('albums.show', $album->id) }}">{{ $album->name }}</a>
@@ -95,6 +95,11 @@
 
                 <button type="button" id="confirmMoveBtn"
                     class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">Move</button>
+
+                <div class="relative px-4 py-3 mt-3 text-red-700 bg-red-100 border border-red-400 rounded" role="alert" id="errorAlbumSearch" hidden>
+                    <strong class="font-bold"></strong>
+                </div>
+
             </div>
         </div>
     </div>
@@ -171,7 +176,8 @@
                                             if(data == true) {
                                                 location.reload();
                                             } else {
-
+                                                $('#errorAlbumSearch').removeAttr('hidden');
+                                                $('#errorAlbumSearch strong').text(data.error);
                                             }
                                         },
                                         error: function (qXhr, textStatus, errorMessage) {

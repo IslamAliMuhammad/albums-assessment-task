@@ -162,7 +162,7 @@ class AlbumController extends Controller
 
                 return 1;
             } else {
-                return 'No album found with this name';
+                return response()->json(['error' => 'No album found with this name']);;
             }
         }
     }
